@@ -3,14 +3,19 @@ import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../global";
+
 export function Update() {
   const [data, setData] = useState(null);
   const { id } = useParams();
+
   useEffect(() => {
-    fetch(`${API}/read`)
-      .then((res) => res.json())
+    fetch(`${API}/read/${id}`, {
+      method: "GET",
+    })
+      .then((data) => data.json())
       .then((dt) => setData(dt));
   }, [id]);
+  console.log(data);
 
   return data ? <UpdateForm data={data} /> : <h1>loading....</h1>;
 }
@@ -21,7 +26,7 @@ function UpdateForm({ data }) {
   const [gender, setGender] = useState(data.gender);
   const [qualification, setQualification] = useState(data.qualification);
   const [place, setPlace] = useState(data.place);
-  const updatedata = async () => {
+  function updatedata() {
     const newdata = {
       name: name,
       age: age,
@@ -30,13 +35,13 @@ function UpdateForm({ data }) {
       place: place,
     };
     console.log(newdata);
-    await fetch(`${API}/${data._id}`, {
+    fetch(`${API}/read/${data._id}`, {
       method: "PUT",
       body: JSON.stringify(newdata),
       headers: { "Content-Type": "application/json" },
     });
     navigate("/read");
-  };
+  }
   return (
     <div>
       <h2 style={{ textAlign: "center" }}>Update Operation </h2>
@@ -46,6 +51,7 @@ function UpdateForm({ data }) {
           variant="outlined"
           onChange={(event) => setName(event.target.value)}
         />
+
         <TextField
           label="Age"
           variant="outlined"
@@ -66,7 +72,7 @@ function UpdateForm({ data }) {
           variant="outlined"
           onChange={(event) => setPlace(event.target.value)}
         />
-        <Button onClick={updatedata} variant="contained">
+        <Button onClick={() => updatedata()} variant="contained">
           Update Details
         </Button>
       </div>
