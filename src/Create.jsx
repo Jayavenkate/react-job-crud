@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API } from "../global";
 export function Create() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -18,7 +19,7 @@ export function Create() {
       place: place,
     };
     console.log(newdata);
-    await fetch("http://localhost:4003/create", {
+    await fetch(`${API}/create`, {
       method: "POST",
       body: JSON.stringify(newdata),
       headers: { "Content-Type": "application/json" },

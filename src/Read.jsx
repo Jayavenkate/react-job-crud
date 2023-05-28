@@ -17,13 +17,13 @@ export function Read() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const deleteData = async (id) => {
-    await fetch("http://localhost:4003/:id", {
+    await fetch(`${API}/:id`, {
       method: "DELETE",
     });
     getData();
   };
   const getData = () => {
-    fetch("http://localhost:4003/read", {
+    fetch(`${API}/read`, {
       method: "GET",
     })
       .then((res) => res.json())

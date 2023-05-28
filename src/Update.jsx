@@ -2,13 +2,14 @@ import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { API } from "../global";
 export function Update() {
   const [data, setData] = useState(null);
   const { id } = useParams();
   useEffect(() => {
-    fetch("http://localhost:4003/read")
+    fetch(`${API}/read`)
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((dt) => setData(dt));
   }, [id]);
 
   return data ? <UpdateForm data={data} /> : <h1>loading....</h1>;
@@ -29,7 +30,7 @@ function UpdateForm({ data }) {
       place: place,
     };
     console.log(newdata);
-    await fetch(`http://localhost:4003/${data._id}`, {
+    await fetch(`${API}/${data._id}`, {
       method: "PUT",
       body: JSON.stringify(newdata),
       headers: { "Content-Type": "application/json" },
