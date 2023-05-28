@@ -26,6 +26,7 @@ function UpdateForm({ data }) {
   const [gender, setGender] = useState(data.gender);
   const [qualification, setQualification] = useState(data.qualification);
   const [place, setPlace] = useState(data.place);
+
   function updatedata() {
     const newdata = {
       name: name,
@@ -42,32 +43,38 @@ function UpdateForm({ data }) {
     });
     navigate("/read");
   }
+
   return (
     <div>
       <h2 style={{ textAlign: "center" }}>Update Operation </h2>
       <div className="create-text">
         <TextField
+          value={name}
           label="Name"
           variant="outlined"
           onChange={(event) => setName(event.target.value)}
         />
 
         <TextField
+          value={age}
           label="Age"
           variant="outlined"
           onChange={(event) => setAge(event.target.value)}
         />
         <TextField
+          value={gender}
           label="Gender"
           variant="outlined"
           onChange={(event) => setGender(event.target.value)}
         />
         <TextField
+          value={qualification}
           label="Qualification"
           variant="outlined"
           onChange={(event) => setQualification(event.target.value)}
         />
         <TextField
+          value={place}
           label="Place"
           variant="outlined"
           onChange={(event) => setPlace(event.target.value)}
