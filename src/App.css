@@ -1,0 +1,8 @@
+.create-text{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 0 auto;
+    gap: 20px;
+    padding-top: 30px;
+}
