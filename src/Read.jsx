@@ -12,6 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API } from "../global";
 
 export function Read() {
   const [data, setData] = useState([]);
