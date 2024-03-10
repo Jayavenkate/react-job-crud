@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../global";
+
 
 export function Update() {
   const [data, setData] = useState(null);
@@ -13,12 +15,14 @@ export function Update() {
       method: "GET",
     })
       .then((data) => data.json())
-      .then((dt) => setData(dt));
+      .then((dt) => setData(dt))
+      .catch((err) => console.log(err))
   }, [id]);
   console.log(data);
 
   return data ? <UpdateForm data={data} /> : <h1>loading....</h1>;
 }
+
 function UpdateForm({ data }) {
   const navigate = useNavigate();
   const [name, setName] = useState(data.name);

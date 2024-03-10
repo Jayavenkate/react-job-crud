@@ -28,6 +28,7 @@ export function Create() {
   };
   return (
     <div>
+
       <h2 style={{ textAlign: "center" }}>Create Operation </h2>
       <div className="create-text">
         <TextField
@@ -59,6 +60,8 @@ export function Create() {
           Add Details
         </Button>
       </div>
+     
     </div>
   );
 }
+

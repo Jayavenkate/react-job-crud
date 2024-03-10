@@ -17,19 +17,29 @@ import { API } from "../global";
 export function Read() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const deleteData = async (id) => {
-    await fetch(`${API}/:id`, {
-      method: "DELETE",
-    });
-    getData();
-  };
+
   const getData = () => {
     fetch(`${API}/read`, {
       method: "GET",
     })
       .then((res) => res.json())
-      .then((data) => setData(data));
+
+      .then((data) => setData(data))
+      .catch((error) => console.log(error));
   };
+  const deleteData = async (id) => {
+    try {
+      await fetch(`${API}/delete/${id}`, {
+        method: "DELETE",
+      });
+      setData(data.filter(item => item._id !== id))
+    } catch (err) {
+      console.log(err)
+    }
+  };
+
+
+
   useEffect(() => {
     getData();
   }, []);
@@ -58,7 +68,7 @@ export function Read() {
                 <TableCell>{data.qualification}</TableCell>
                 <TableCell>{data.place}</TableCell>
                 <TableCell>
-                  <Button onClick={() => deleteData(data.id)} color="error">
+                  <Button onClick={() => deleteData(data._id)} color="error">
                     <DeleteIcon />
                   </Button>
                 </TableCell>
