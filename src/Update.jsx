@@ -18,7 +18,7 @@ export function Update() {
       .then((dt) => setData(dt))
       .catch((err) => console.log(err))
   }, [id]);
-  console.log(data);
+
 
   return data ? <UpdateForm data={data} /> : <h1>loading....</h1>;
 }
